@@ -1,0 +1,29 @@
+*** Keywords ***
+
+Test CPM Code Changes
+   ${INTEGER} =    Set Variable    0
+   ${rc}	${Tbls} =	Run And Return RC and Output   sqlcmd -S ${DW_SRV} -W -s"," -w 700 -i "${CURDIR}\\scripts\\output\\CPM_ReadLog.sql" -d "dbmSemanticAnalyticsSTG" -h-1
+   Should Be Equal As Integers    ${rc}    0
+   #Log	${Tbls}
+   #Log	@{ColNames}[1]
+   @{TBL_row} =  Split to lines	${Tbls}
+   :FOR	${row}	IN	@{TBL_row}
+   \	@{Val} =	Split String	${row}	,
+   \	CPM Test Loop	@{Val}[0]	@{Val}[1]	${INTEGER}	@{ColNames}
+   \	${INTEGER} =    Evaluate    ${INTEGER} + 1
+ 
+ 
+CPM Test Loop	[Arguments]	${tblid}	${tblname}	${INTEGER}	@{ColNames}	
+   #Log	@{ColNames}[${INTEGER}]
+   ${rc}	${Max} =    Run And Return RC and Output   sqlcmd -S ${DW_SRV} -v tblId= "${tblid}" -W -s"," -w 700 -i "${CURDIR}\\scripts\\output\\CPM_CodeChangesMax.sql" -d "dbmSemanticAnalyticsSTG" -h-1
+   Should Be Equal As Integers    ${rc}    0
+   ${INTEGER} =    Evaluate	${tblid} - 1
+   #Log	${tblId}
+   #Log	@{ColNames}
+   #Log	@{ColNames}[1]
+   Log	@{ColNames}[${INTEGER}]
+   ${rc}	${Output} =    Run And Return RC and Output   sqlcmd -S ${DW_SRV} -v tblName="${tblname}" -v ColName="@{ColNames}[${INTEGER}]" -W -s"," -w 700 -i "${CURDIR}\\scripts\\output\\CPM_CodeChanges.sql" -d "dbmSemanticAnalytics" -h-1
+   Should Be Equal As Integers    ${rc}    0
+   @{Values} =  Split to lines  ${Output}
+   :FOR  ${Value}  IN  @{Values}
+   \	Run Keyword And Continue On Failure  Should Be True    ${Value} > ${Max}

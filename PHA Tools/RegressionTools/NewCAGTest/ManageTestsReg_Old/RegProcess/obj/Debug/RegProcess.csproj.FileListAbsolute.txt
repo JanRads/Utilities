@@ -1,0 +1,11 @@
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\bin\Debug\RegProcess.dll
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\bin\Debug\RegProcess.pdb
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\bin\Debug\ManageTestsReg.exe
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\bin\Debug\ManageTestsReg.pdb
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\obj\Debug\RegProcess.csprojResolveAssemblyReference.cache
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\obj\Debug\RegProcess.dll
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\obj\Debug\RegProcess.pdb
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\bin\Debug\DataLoading.dll
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\bin\Debug\DataLoading.pdb
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\bin\Debug\DALL.dll
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\RegProcess\bin\Debug\DALL.pdb

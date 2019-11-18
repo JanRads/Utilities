@@ -1,0 +1,5 @@
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\DataLoading\bin\Release\DataLoading.dll
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\DataLoading\bin\Release\DataLoading.pdb
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\DataLoading\obj\Release\DataLoading.csprojResolveAssemblyReference.cache
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\DataLoading\obj\Release\DataLoading.dll
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\DataLoading\obj\Release\DataLoading.pdb

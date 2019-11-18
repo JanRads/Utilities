@@ -1,0 +1,7 @@
+LastName,IndicatorId,FromDate,To_Date,measure_IndicatorInd,FlagNew
+secondnamedPH1,10,20141201,20161201,1,0
+secondnamedPH1,11,20150101,20170101,1,0
+secondnamedPH1,14,20141001,20161001,1,0
+secondnamePHA25_CAD_Pr1,14,20141001,20161001,1,0
+secondnamePHA25_Diab_Pr1,10,20141201,20170201,1,0
+secondnamePHA25_HF_Pr1,11,20150101,20170101,1,0

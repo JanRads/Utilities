@@ -1,0 +1,6 @@
+LastName,IndicatorId,FromDate,To_Date,measure_IndicatorInd,FlagNew
+secondnamePHA25_Arthritis_P1,2,20150201,20170201,1,1
+secondnamePHA25_Arthritis_P2,2,20150101,20170101,1,1
+secondnamePHA25_AtFib_DX_P1,4,20160101,20170101,1,1
+secondnamePHA25_AtFib_DX_P2,4,20160201,20170201,1,1
+secondnamePHA25_AtFib_DX_P3,4,20160201,20170201,1,1

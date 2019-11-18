@@ -1,0 +1,1 @@
+exec xp_cmdshell 'sqlcmd -S dbm8-data112\inst03 -i "C:\Program Files\Common Files\Regression\Input\LoadJobSites.sql" -o "C:\Program Files\Common Files\Regression\Output\LoadJobSitesOut.sql"'

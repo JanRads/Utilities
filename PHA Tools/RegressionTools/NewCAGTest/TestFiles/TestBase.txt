@@ -1,0 +1,17 @@
+*** Documentation ***
+Usage
+   ipybot --variable CAG_SRV:dbm8-data111\inst01 --variable DW_SRV:dbm8-data111\inst01 PHARegTest.txt
+
+*** Settings ***
+Library   OperatingSystem
+Library   DiffLibrary
+Library   String
+Variables	ConnectionString.py
+Resource	OutsideKeywords.txt	
+Variables   ${CURDIR}\\..\\CAG_CodeChanges_ColNames.py
+
+*** Test Cases ***
+
+Dummy Test
+	[Tags]	Dummy
+	Log	${SPACE}

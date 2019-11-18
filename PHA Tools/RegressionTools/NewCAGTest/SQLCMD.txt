@@ -1,0 +1,154 @@
+*** Keywords ***
+Create CSV	[Arguments]	${file}
+	${rc} =    Run Keyword If	${Auto} == 0  Run	XlsToCsv ${CURDIR}\\${TestList} ${CURDIR}\\TestFiles\\${file}.csv ${file}
+	${file} =	Catenate	SEPARATOR=\\	TestFiles	${file}
+	Copy File	${CURDIR}\\testFiles\\TestBase.txt	${file}-Write.txt
+	Copy File	${CURDIR}\\TestFiles\\TestBase.txt	${file}-Diff.txt	
+
+Test Loop	[Arguments]	${file}	@{Val}
+	${counter} =	Set Variable	0
+ 	:FOR	${row}	IN	@{Val}
+	\	${counter} =	Evaluate	${counter} + 1
+	\	Continue For Loop If	${counter} == 1
+	\	Log	${row}
+	\	Run Test	${row}	${file}
+	
+Full File	[Arguments]	${file}	${join}
+	${cdir} =	Replace String	${CURDIR}	\\	\\\\
+	${cdir} =	Catenate	SEPARATOR=\\\\	${cdir}  ${join}
+	${full} = 	Replace String	${file}	\\	\\\\
+	${full} =	Catenate	SEPARATOR=\\\\	${cdir}	${full}
+	[return]	${full}
+	
+Run Test	[Arguments]	${Val}	${file}
+	@{words} =	Split String	${Val}	,
+	${tag} =	Set Variable	@{words}[1]
+	${name} =	Set Variable	@{words}[0]
+	${fullFileActual} =	Full File	@{words}[2]	scripts
+	${fullFileExpected} =	Full File	@{words}[3]	scripts
+##	${actual} =	Catenate	SEPARATOR=\\	actual	@{words}[4]	
+	${OutputActual} =	Full File	@{words}[4]	actual
+##	${expected} =	Catenate	SEPARATOR=\\	expected	@{words}[5]		
+	${OutputExpected} =	Full File	@{words}[5]	expected
+	${Type} =	Set Variable	@{words}[6]
+	${expectedLength} =	Get Length	${fullFileExpected}
+	${expectedLength} =	Evaluate	${expectedLength} - 3
+	${suffix} =	Get Substring	${fullFileExpected}	${expectedLength}
+	${static} =	Set Variable If	'${suffix}' == 'sql'	0	1
+	${fileLength} =	Get Length	${file}
+	${fileLength} =	Evaluate	${fileLength} - 4
+	${file} =	Get Substring	${file}	0	${fileLength}
+	${nameL} =	Get Length	${name}
+	Run Keyword If	${nameL}>0	${Type}	${name}	${tag}	${fullFileActual}	${fullFileExpected}	${OutputActual}	${OutputExpected}	${static}	${file}
+
+
+Clean String	[Arguments]	@{data}
+	${test} =	Convert to String	${data}
+	${test} =	Replace String	${test}	'	${EMPTY}
+	${test} =	Replace String	${test}	[	${EMPTY}
+	${test} =	Replace String	${test}	]	${EMPTY}
+	${test} =	Replace String	${test}	${SPACE}	${EMPTY}	
+	@{Val} =	Split String	${test}	,
+	[return]	@{Val}   
+	
+##Test1
+##   ${rc} =    Run And Return RC   sqlcmd -S ${DW_SRV} -i "${CURDIR}\\scripts\\input\\INSERT_Encounters.sql"
+##   Should Be Equal As Integers    ${rc}    0
+   
+Run Script	[Arguments]	${name}	${tag}	${fullFileActual}	${fullFileExpected}	${OutputActual}	${OutputExpected}	${static}	${file}
+	${WriteFile} =	Catenate	SEPARATOR=-	${file}	Write.txt
+	Append To File	${CURDIR}\\${WriteFile}	\n\n${name}
+	Append To File	${CURDIR}\\${WriteFile}	\n\t[Tags]\t${tag}
+	Append To File	${CURDIR}\\${WriteFile}	\n\t\${rc} =\tRun And Return RC\tsqlcmd -S \${DW_SRV} -v OlapServer="\${DW_SRV}" -i "${fullFileActual}"
+    Append To File	${CURDIR}\\${WriteFile}	\n\tRun Keyword And Continue On Failure\tShould Be Equal As Integers\t\${rc}\t0
+	
+##Test3
+##   ${rc} =    Run And Return RC   sqlcmd -S ${DW_SRV} -i "${CURDIR}\\scripts\\input\\SetSLRLocal.sql" 
+##   Should Be Equal As Integers    ${rc}    0
+   
+Create Dataset CSV	[Arguments]	${name}	${tag}	${fullFileActual}	${fullFileExpected}	${OutputActual}	${OutputExpected}	${static}	${file}
+	${WriteFile} =	Catenate	SEPARATOR=-	${file}	Write.txt
+	Append To File	${CURDIR}\\${WriteFile}	\n\n${name} Actual
+	Append To File	${CURDIR}\\${WriteFile}	\n\t[Tags]\tDataset Creation
+	Append To File	${CURDIR}\\${WriteFile}	\n\t\${rc} =\tRun And Return RC\tsqlcmd -S \${DW_SRV} -W -s"," -w 700 -i "${fullFileActual}" -o "${OutputActual}"
+    Append To File	${CURDIR}\\${WriteFile}	\n\tRun Keyword And Continue On Failure\tShould Be Equal As Integers\t\${rc}\t0
+	
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\n${name} Expected
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\t[Tags]\tDataset Creation
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\t\${rc} =\tRun And Return RC\tsqlcmd -S \${DW_SRV} -W -s"," -w 700 -i "${fullFileExpected}" -o "${OutputExpected}"
+    Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\tRun Keyword And Continue On Failure\tShould Be Equal As Integers\t\${rc}\t0
+
+	${DiffFile} =	Catenate	SEPARATOR=-	${file}	Diff.txt
+	Append To File	${CURDIR}\\${DiffFile}		\n\n${name} Diff
+	Append To File	${CURDIR}\\${DiffFile}		\n\t[Tags]\t${tag}
+	Append To File	${CURDIR}\\${DiffFile}		\n\t\Diff Files\t${OutputActual}\t${OutputExpected}
+	
+   
+Create Dataset TXT	[Arguments]	${name}	${tag}	${fullFileActual}	${fullFileExpected}	${OutputActual}	${OutputExpected}	${static}	${file}
+	${WriteFile} =	Catenate	SEPARATOR=-	${file}	Write.txt
+	Append To File	${CURDIR}\\${WriteFile}	\n\n${name} Actual
+	Append To File	${CURDIR}\\${WriteFile}	\n\t[Tags]\tDataset Creation
+	Append To File	${CURDIR}\\${WriteFile}	\n\t\${rc} =\tRun And Return RC\tsqlcmd -S \${DW_SRV} -i "${fullFileActual}" -o "${OutputActual}"
+    Append To File	${CURDIR}\\${WriteFile}	\n\tRun Keyword And Continue On Failure\tShould Be Equal As Integers\t\${rc}\t0
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\n${name} Expected
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\t[Tags]\tDataset Creation
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\t\${rc} =\tRun And Return RC\tsqlcmd -S \${DW_SRV} -i "${fullFileExpected}" -o "${OutputExpected}"
+    Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\tRun Keyword And Continue On Failure\tShould Be Equal As Integers\t\${rc}\t0
+
+	${DiffFile} =	Catenate	SEPARATOR=-	${file}	Diff.txt
+	Append To File	${CURDIR}\\${DiffFile}		\n\n${name} Diff
+	Append To File	${CURDIR}\\${DiffFile}		\n\t[Tags]\t${tag}
+	Append To File	${CURDIR}\\${DiffFile}		\n\t\Diff Files\t${OutputActual}\t${OutputExpected}
+
+	
+   
+Create Dataset CSV + OLAP	[Arguments]	${name}	${tag}	${fullFileActual}	${fullFileExpected}	${OutputActual}	${OutputExpected}	${static}	${file}
+	${WriteFile} =	Catenate	SEPARATOR=-	${file}	Write.txt
+	Append To File	${CURDIR}\\${WriteFile}	\n\n${name} Actual
+	Append To File	${CURDIR}\\${WriteFile}	\n\t[Tags]\tDataset Creation
+	Append To File	${CURDIR}\\${WriteFile}	\n\t\${rc} =\tRun And Return RC\tsqlcmd -S \${DW_SRV} -W -s"," -w 700 -v OlapServer="\${DW_SRV}" -i "${fullFileActual}" -o "${OutputActual}"
+    Append To File	${CURDIR}\\${WriteFile}	\n\tRun Keyword And Continue On Failure\tShould Be Equal As Integers\t\${rc}\t0
+	
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\n${name} Expected
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\t[Tags]\tDataset Creation
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\t\${rc} =\tRun And Return RC\tsqlcmd -S \${DW_SRV} -W -s"," -w 700 -v OlapServer="\${DW_SRV}" -i "${fullFileExpected}" -o "${OutputExpected}"
+    Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\tRun Keyword And Continue On Failure\tShould Be Equal As Integers\t\${rc}\t0
+
+	${DiffFile} =	Catenate	SEPARATOR=-	${file}	Diff.txt
+	Append To File	${CURDIR}\\${DiffFile}		\n\n${name} Diff
+	Append To File	${CURDIR}\\${DiffFile}		\n\t[Tags]\t${tag}
+	Append To File	${CURDIR}\\${DiffFile}		\n\t\Diff Files\t${OutputActual}\t${OutputExpected}
+	
+   
+Create Dataset TXT + OLAP	[Arguments]	${name}	${tag}	${fullFileActual}	${fullFileExpected}	${OutputActual}	${OutputExpected}	${static}	${file}
+	${WriteFile} =	Catenate	SEPARATOR=-	${file}	Write.txt
+	Append To File	${CURDIR}\\${WriteFile}	\n\n${name} Actual
+	Append To File	${CURDIR}\\${WriteFile}	\n\t[Tags]\tDataset Creation
+	Append To File	${CURDIR}\\${WriteFile}	\n\t\${rc} =\tRun And Return RC\tsqlcmd -S \${DW_SRV} -v OlapServer="\${DW_SRV}" -i "${fullFileActual}" -o "${OutputActual}"
+    Append To File	${CURDIR}\\${WriteFile}	\n\tRun Keyword And Continue On Failure\tShould Be Equal As Integers\t\${rc}\t0
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\n${name} Expected
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\t[Tags]\tDataset Creation
+	Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\t\${rc} =\tRun And Return RC\tsqlcmd -S \${DW_SRV} -v OlapServer="\${DW_SRV}" -i "${fullFileExpected}" -o "${OutputExpected}"
+    Run Keyword If	${static} == 0	Append To File	${CURDIR}\\${WriteFile}	\n\tRun Keyword And Continue On Failure\tShould Be Equal As Integers\t\${rc}\t0
+
+	${DiffFile} =	Catenate	SEPARATOR=-	${file}	Diff.txt
+	Append To File	${CURDIR}\\${DiffFile}		\n\n${name} Diff
+	Append To File	${CURDIR}\\${DiffFile}		\n\t[Tags]\t${tag}
+	Append To File	${CURDIR}\\${DiffFile}		\n\t\Diff Files\t${OutputActual}\t${OutputExpected}
+	
+New Keyword	[Arguments]	${name}	${tag}	${fullFileActual}	${fullFileExpected}	${OutputActual}	${OutputExpected}	${static}	${file}
+	${DiffFile} =	Catenate	SEPARATOR=-	${file}	Diff.txt
+	Append To File	${CURDIR}\\${DiffFile}	\n\n${name}
+	Append To File	${CURDIR}\\${DiffFile}	\n\t[Tags]\t${tag}	
+	Append To File	${CURDIR}\\${DiffFile}	\n\t${name}
+	
+##Test5
+##   ${rc} =    Run And Return RC   sqlcmd -S ${DW_SRV} -i "${CURDIR}\\scripts\\output\\Img_Out_Persist_check.sql" -o "${CURDIR}\\actual\\ImgOutputPersistStep2.txt"
+##   Should Be Equal As Integers    ${rc}    0
+   
+TestTXT
+	${rc} =    Run And Return RC   sqlcmd -S ${DW_SRV} -v OlapServer="${DW_SRV}" -i "${CURDIR}\\scripts\\output\\LOS_OUT_MDX.sql" -o "${CURDIR}\\actual\\LOS_OUT_Rate2.txt"
+   Should Be Equal As Integers    ${rc}    0
+
+TestDiff
+   Diff Files    ${CURDIR}\\actual\\Output_PCP.txt    ${CURDIR}\\expected\\\Static_Output_PCP.txt

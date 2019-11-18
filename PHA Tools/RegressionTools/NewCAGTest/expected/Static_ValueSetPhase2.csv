@@ -1,0 +1,144 @@
+Column1,Name
+1,Claims Pn
+2,heartExHRmeasure
+2,DepReadPHQMeasure
+2,CADmodSevLVSDCond
+2,BMIABNC
+3,Systolic
+3,heartseverecond
+3,heartmoderatecond
+3,HBPSysMeasure
+3,HBPElectroPro
+3,HBPDiaMeasure
+3,Diastolic
+3,Depress-NSCond
+3,Depress+PSCond
+3,CADSevLVSDCond
+3,CADmodLVSDCond
+3,BMImeasure
+4,HBPInterLifeStyleC
+4,FallRSmeasure
+4,depressCDSMeasure
+4,CADExACEAller
+4,BreastExUMC
+5,Immunizations Pn
+5,conditions Pn
+5,BreastExBMC
+6,tabaccoUSmeasure
+6,tabaccoCCIC
+6,HBPElectroMeasure
+6,FallRCond
+7,IVDPCIC
+10,Procedures Pn
+10,A1C Labs
+11,heartLVSDcond
+11,ColorExCCCC
+11,CADLVSDCond
+11,CADExARBCond
+15,HBPInterCondyear
+15,ColorFSP
+15,BreastMammImage
+17,ExtabaccoTICond
+17,Claims Inf
+18,Procedures Inf
+18,Conditions Inf
+18,BreastMammC
+20,heartExPPcond
+20,DepReadExPNHC
+20,BMIFUC
+21,IVDCABGC
+21,HBPInterConddays
+21,BMIOverUnderWCond
+25,DepReadGVC
+28,HBPLabs
+28,ColorFSC
+29,heartExARcond
+29,ColorCC
+29,CADExACECond
+30,tabaccoPVC
+30,Immunizations Inf
+30,heartLVEFmeasure
+30,CADLVEFMeasure
+30,CADCSC
+33,tabaccoCCIP
+34,depressGVC
+35,EyeNRCon
+36,BreastExBMpro
+37,DepReaddysthymiaCond
+38,IVDGVC
+38,EyeGVC
+38,ColorGVC
+38,Claims GV
+38,BreastGVC
+39,ColorFlab
+42,Exc Allergy Inf
+43,BMIGVC
+46,Claims PV
+48,HTN GVC
+50,BMImedic
+54,heartExA4Betacond
+56,IVDPCIPro
+58,EyeDiabetesExclu
+59,IVDPCICond
+63,heartExABcond
+64,tabacco2GVC
+67,ColorCP
+68,FallExMRCond
+70,DocPro
+75,FallGVC
+82,HTN Condition
+85,CADGVC
+88,tabaccoNUCond
+89,heartGVC
+94,tabaccoUserCond
+98,heartExHypcond
+100,Exc Procedure Inf Sys
+100,Exc condition Inf Sys
+101,ExlHTN_RTC
+103,ExlHTN_DC
+107,EyeExamPro
+116,DocGVC
+127,HBPGVC
+134,BreastExUMpro
+143,IVDCABGPro
+150,IVDCABGCond
+159,Claims 2GV
+172,CADCSPro
+178,IVDAMIcond
+189,DepReadMajorDCond
+208,DepReadExPDCond
+252,BreastMammDoc
+261,heartExAsthmacond
+271,heartHFcond
+279,heartExBradycond
+296,Exc Procedure Inf Pat
+296,Exc condition Inf Pat
+333,ColorExCCCP
+335,HBPInterLifeStylePro
+336,CADExARBAller
+345,ColorExCCCCond
+359,depressInterProce
+384,DepReadExBDCond
+418,IVDAntiMedi
+422,ExlHTN_RTP
+422,ExlHTN_DP
+424,ExlHTN_ESRD
+491,CADExARCond
+526,heartBetaBlockerMedic
+538,EyeDiabetesCond
+538,A1C Condition
+574,tabaccoCessMedic
+586,HBPExActHyperCond
+633,CADdiabeCond
+640,CADCond
+686,heartExArrcond
+757,heartExA4BetaAllergy
+777,ExDepressCond
+777,ExDepressBDCond
+853,HBPInterAlternativePro
+1237,BMIFUPro
+1239,BMIFUcond
+1906,CADMedication
+2066,depressCDMedic
+4419,Exc Procedure Inf Med
+4419,Exc condition Inf Med

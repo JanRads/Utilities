@@ -1,0 +1,384 @@
+321,1,2,3,202,4,5,6,190,191,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24,23,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,104,106,109,110,114,115,117,120,121,156,158,161,164,166,169,170,181,182,183,184,185,186,187,188,194,195,196,197,198,199,200,201,203,204,205,206,238,239;131,132;322,1,2,3,359,202,244,361,353,360,245,5,6,190,209,210,213,309,312,7,10,348,158,161,104,239,9,13,32,164,156,242,33,34,181,182,183,184,200,201,289,291,292,293,294,301,302,303,304,305,306,307,308,212,214,215,216,217,351,352,354,355,356,357,358;253,281,330,246,247,248,249,250,251,270,272,273,271,274,275,310,311,276,278,279,280,282,349,283,284,285,286,287,288,313,314,315,316,317,318,212,214,352;325,1,2,3,202,244,245,295,5,6,190,7,10,9,13,33,34,181,182,183,184,200,201,289,296,297;324,298,256,246,247,251,282,283,299,300;341,346,347,332,335,245,5,6,336,342,331,333,334,344,337,343,338,339,340,345,328,350,351;362,366,368,371,372,373,374;370;377,378,379,380,381,382,383
+ID,Test_Name,Tag,Script_Actual,Script_Expected,Type
+1,Truncate local CAG ,Setup,input\DeleteCag.sql,,Static
+2,Truncate local STG,Setup,input\DELETE_dbmSemanticAnalyticsSTG.sql,,Static
+3,Truncate local DWH,Setup,input\Delete_dbmSemanticAnalytics.sql,,Static
+4,Load data to CAG,Setup,input\DataLoadingPhase1.SQL,,Static
+5,Set SLR Local,Setup,input\SetSLRLocal.sql,,Static
+6,Run sync job,Setup,LoadJob.sql,,Static
+7,EncountersInsert,Test,output\Anal_DWH_check.sql,output\INSERT_Encounters.sql,Dynamic
+8,Test Persist_Imaging,Test,output\Img_Out_Persist_check.sql,Static_ImgOutputPersistStep1.txt,Static
+9,PatientsInsert,Test,output\Patient_DWH.sql,output\Patient_CAG.sql,Dynamic
+10,ProvidersInsert,Test,output\Provider_DWH.sql,output\Provider_CAG.sql,Dynamic
+11,Test Readmissions,Test,output\ReadmissionsOutputStep1.sql,Static_ReadmissionsOutputStep1.txt,Static
+12,Test ReadmissionRate,Test,output\ReadmissionRateMDX.sql,output\ReadmissionRateDWH.sql,Dynamic
+13,PCPInsert,Test,output\PCP_DWH.sql,output\PCP_CAG.sql,Dynamic
+14,Test PCPOrg,Test,output\Output_PatientRelationOrg.sql,Static_Output_PatientRelationOrg.txt,Static
+15,Test ReadmissionRateCohort,Test,output\ReadmissionRateCohortMDX.sql,output\ReadmissionRateCohortDWH.sql,Dynamic
+16,Test ReadmissionRateOrg,Test,output\ReadmissionRateOrgMDX.sql,output\ReadmissionRateOrgDWH.sql,Dynamic
+17,Test FUVRate,Test,output\FUVRateMDX.sql,output\FUVRateDWH.sql,Dynamic
+18,Test LOS_OUT_Rate,Test,output\LOS_OUT_MDX.sql,output\LOS_OUT_DWH.sql,Dynamic
+19,Test FUV_Out_Rate,Test,output\FUV_Out_MDX.sql,output\FUV_Out_DWH.sql,Dynamic
+20,Test reRate_Out,Test,output\reRate_Out_MDX.sql,output\reRate_Out_DWH.sql,Dynamic
+21,Test admited_rate_out,Test,output\admited_rate_out_MDX.sql,output\admited_patient_rate_out_DWH.sql,Dynamic
+22,Test ReRate In DTR,Test,output\RERateInDtrSQL.sql,output\RERateInDtrMDX.sql,Dynamic
+23,Test ReRate Out DTR,Test,output\RERateOutDtrSQL.sql,output\RERateOutDtrMDX.sql,Dynamic
+24,Test DWH_Procedures,Test,output\Procedures_DWH.sql,Static_Procedures_DWH_Result.txt,Static
+25,Test Diff_MeasuresMembersMonthly1,Test,output\MeasuresMembersMonthly_Actual.sql,Static_MeasuresMembersMonthly.txt,Static
+26,Test Diff_PopulationMembersMonthly1,Test,output\PopulationMembersMonthly_Actual.sql,Static_PopulationMembersMonthly.txt,Static
+27,Test Diff_CPMDiseaseCalcs,Test,output\DiseaseScoreMDX.sql,output\DiseaseScoreDWH.sql,Dynamic
+28,Test CPM Admission,Test,output\CPMAdmissions_DWH.sql,output\CPMAdmissions_CAG.sql,Dynamic
+29,Test CPM Amb,Test,output\CPMAmb_DWH.sql,output\CPMAmb_CAG.sql,Dynamic
+30,Test CPM ED,Test,output\CPMED_DWH.sql,output\CPMED_CAG.sql,Dynamic
+31,Test AdminCodes and ClinicalCodes,Test,output\Codes_Actual.sql,output\Codes_Expected.sql,Dynamic
+32,ConditionsInsert,Test,output\Conditions_DWH.sql,output\Conditions_CAG.sql,Dynamic
+33,LabsOrderInsert,Test,output\LabsOrder_DWH.sql,output\LabsRequest_CAG.sql,Dynamic
+34,LabsResultInsert,Test,output\LabsResult_DWH.sql,output\LabsResult_CAG.sql,Dynamic
+35,Test Population Age,Test,output\PopSum_Age.sql,output\PopCalc_Age.sql,Dynamic
+36,Test Population Org,Test,output\PopSum_Org.sql,output\PopCalc_Org.sql,Dynamic
+37,Test Population Provider,Test,output\PopSum_Provider.sql,output\PopCalc_Provider.sql,Dynamic
+38,Test Measure Age,Test,output\MeasureSum_Age.sql,output\MeasureCalc_Age.sql,Dynamic
+39,Test Measure Org,Test,output\MeasureSum_Org.sql,output\MeasureCalc_Org.sql,Dynamic
+40,Test Measure Provider,Test,output\MeasureSum_Provider.sql,output\MeasureCalc_Provider.sql,Dynamic
+41,Test Population Dates,Test,output\PopSum_Date.sql,output\PopCalc_Date.sql,Dynamic
+42,Test Measure Dates,Test,output\MeasureSum_Date.sql,output\MeasureCalc_Date.sql,Dynamic
+43,Test Diesease Gender,Test,output\Disease_Gender_Kpi_SQL.sql,output\Disease_Gender_Kpi_MDX.sql,Dynamic
+44,Test Gender,Test,output\Gender_Kpi_SQL.sql,output\Gender_Kpi_MDX.sql,Dynamic
+45,Test Gender KPI,Test,output\Gender_Kpi_cqm_MDX.sql,output\Gender_Kpi_cqm_SQL.sql,Dynamic
+46,Test Age Group KPI,Test,output\AG_KPI_MDX.sql,output\AG_KPI_SQL.sql,Dynamic
+47,Test Disease AgeGroup,Test,output\Disease_AgeGroup_Kpi_MDX.sql,output\Disease_AgeGroup_Kpi_SQL.sql,Dynamic
+48,Test Age Group ALL,Test,output\AG_ALL_MDX.sql,output\AG_ALL_SQL.sql,Dynamic
+49,Test Disease Org,Test,output\DiseaseOrgMDX.sql,output\DiseaseOrgSQL.sql,Dynamic
+50,Test for PatientList,Test,output\PatientList_PatientRank_MDX.sql,output\PatientList_PatientRank_DWH.sql,Dynamic
+51,Test KPI Org,Test,output\KPIOrgMDX.sql,output\KPI_ORG_DWH.sql,Dynamic
+52,Test Date KPI,Test,output\Dates_KPI_MDX.sql,output\Dates_KPI_SQL.sql,Dynamic
+53,Test Date Disease,Test,output\Dates_Disease_MDX.sql,output\Dates_Disease_SQL.sql,Dynamic
+54,Load data to CAG Phase2,Setup,input\DataLoadingPhase2.SQL,,
+55,Run sync job Phase2,Setup,LoadJob.sql,,
+56,Test Analytics_Patients2,Test,output\Patient_DWH.sql,output\Patient_CAG.sql,Dynamic
+57,Test Analytics_Providers2,Test,output\Provider_DWH.sql,output\Provider_CAG.sql,Dynamic
+58,Test PCP2,Test,output\Output_PCP.sql,Static_Output_PCP2.txt,Static
+59,Test PCPOrg2,Test,output\Output_PatientRelationOrg.sql,Static_Output_PatientRelationOrg2.txt,Static
+60,Test Readmissions2,Test,output\ReadmissionsOutputStep1.sql,Static_ReadmissionsOutputStep2.txt,Static
+61,Test ReadmissionRate2,Test,output\ReadmissionRateMDX.sql,output\ReadmissionRateDWH.sql,Dynamic
+62,Test ReadmissionRateCohort2,Test,output\ReadmissionRateCohortMDX.sql,output\ReadmissionRateCohortDWH.sql,Dynamic
+63,Test ReadmissionRateOrg2,Test,output\ReadmissionRateOrgMDX.sql,output\ReadmissionRateOrgDWH.sql,Dynamic
+64,Test Persist_Imaging2,Test,output\Img_Out_Persist_check.sql,Static_ImgOutputPersistStep2.txt,Static
+65,Test LOS_OUT_Rate results2,Test,output\LOS_OUT_MDX.sql,output\LOS_OUT_DWH.sql,Dynamic
+66,Test reRate_Out results2,Test,output\reRate_Out_MDX.sql,output\reRate_Out_DWH.sql,Dynamic
+67,Test FUV_Out_Rate results2,Test,output\FUV_Out_MDX.sql,output\FUV_Out_DWH.sql,Dynamic
+68,Test admited_rate_out2,Test,output\admited_rate_out_MDX.sql,output\admited_patient_rate_out_DWH.sql,Dynamic
+69,Test DWH_Procedure2,Test,output\Procedures_DWH.sql,Static_Procedures_DWH_Result_phase2.txt,Static
+70,Test Fact Conditions phase2,Test,output\Conditions_DWH.sql,output\Conditions2_CAG.sql,Dynamic
+71,Test Fact Labs Order phase2,Test,output\LabsOrder2_DWH.sql,output\LabsRequest2_CAG.sql,Dynamic
+72,Test Fact Labs Result Phase2,Test,output\LabsResult2_DWH.sql,output\LabsResult2_CAG.sql,Dynamic
+73,Test Generic Inpatient,Test,output\executive Check_SQL_In.sql,output\executive Check_MDX_Inpatient.sql,Dynamic
+74,Test Generic SQL OUT,Test,output\executive Check_SQL_Out.sql,output\executive Check_MDX_Outpatient.sql,Dynamic
+75,Test Prev Scores,Test,output\PervScoreDWH.sql,output\PrevScoreMDX.sql,Dynamic
+76,Test CPM Code Changes,Test,,,
+77,Load data to CAG3,Setup,input\INSERT_PopsAndMetrics.sql,,
+78,Run sync job phase3,Setup,LoadJob.sql,,
+79,Test Diff_CPMKPICalcs,Test,output\KPIScoreMDX.sql,output\KPIScoreDWH.sql,Dynamic
+80,Test Diff_MeasuresMembersMonthly_BMI,Test,output\MeasuresBMI_Actual.sql,Static_MeasuresBMI.txt,Static
+81,Test Diff_PopulationMembersMonthly_BMI,Test,output\PopulationBMI_Actual.sql,Static_PopulationBMI.txt,Static
+82,Test Diff_no_m2m,Test,output\no_m2m_check_MDX.sql,output\no_m2m_check_SQL.sql,Dynamic
+83,Test Diff_MeasuresMembersMonthly_HTNPharmacotherapy,Test,output\MeasuresHTNPharmacotherapy_Actual.sql,Static_MeasuresHTNPharmacotherapy_Actual.txt,Static
+84,Test Diff_PopulationMembersMonthly_HTNPharmacotherapy,Test,output\PopulationHTNPharmacotherapy_Actual.sql,Static_PopulationHTNPharmacotherapy_Actual.txt,Static
+85,Test Diff_MeasuresMembersMonthly_BP,Test,output\MeasuresMembersMonthly_ActualBP.sql,Static_MeasuresBP.csv,Static
+86,Test Diff_PopulationMembersMonthly_BP,Test,output\PopulationMembersMonthly_ActualBP.sql,Static_PopulationBP.csv,Static
+87,Test Diff_Measures_BPandHTNPharama,Test,output\Measures_ActualBPandHTNPharma.sql,Static_MeasuresBPandHTNPharma.csv,Static
+88,Test Diff_Population_BPandHTNPharma,Test,output\Population_ActualBPandHTNPharma.sql,Static_PopulationBPandHTNPharma.csv,Static
+89,Test Diff_CombinedScore,Test,output\COMBINED_SCORES_MDX.sql,output\COMBINED_SCORES_SQL.sql,Dynamic
+90,Test Population Age,Test,output\PopSum_Age.sql,output\PopCalc_Age.sql,Dynamic
+91,Test Population Org,Test,output\PopSum_Org.sql,output\PopCalc_Org.sql,Dynamic
+92,Test Population Provider,Test,output\PopSum_Provider.sql,output\PopCalc_Provider.sql,Dynamic
+93,Test Measure Age,Test,output\MeasureSum_Age.sql,output\MeasureCalc_Age.sql,Dynamic
+94,Test Measure Org,Test,output\MeasureSum_Org.sql,output\MeasureCalc_Org.sql,Dynamic
+95,Test Measure Provider,Test,output\MeasureSum_Provider.sql,output\MeasureCalc_Provider.sql,Dynamic
+96,Test Population Dates,Test,output\PopSum_Date.sql,output\PopCalc_Date.sql,Dynamic
+97,Test Measure Dates,Test,output\MeasureSum_Date.sql,output\MeasureCalc_Date.sql,Dynamic
+98,Test Community,Test,output\Community_MDX.sql,output\Community_SQL.sql,Dynamic
+99,Test Pop Distinct Pateints,Test,output\PopDistinctPatients_MDX.sql,output\PopDistinctPatients_SQL.sql,Dynamic
+100,Test Disease Provider,Test,output\DiseaseProviderMDX.sql,output\Disease_ProviderDWH.sql,Dynamic
+101,Test KPI Provider,Test,output\KPI_ProviderMDX.sql,output\KPI_ProviderDWH.sql,Dynamic
+102,Test Code Links,Test,output\CodeLinks.sql,Static_CodeLinks_Expected_Phase1.CSV,Static
+103,Test Code Links - Phase 2,Test,output\CodeLinks.sql,Static_CodeLinks_Expected_Phase2.CSV,Static
+104,MeasurementInsert,Test,output\Measurement_DWH.sql,output\Measurement_CAG.sql,Dynamic
+105,Test Measurement2,Test,output\Measurment2_DWH.sql,output\Measurement2_CAG.sql,Dynamic
+106,Test ValueSet,Test,output\ValueSet.sql,output\ExpectedValeSets.sql,Dynamic
+107,Test ValueSet phase2 ,Test,output\ValueSet..sql,Static_ValueSetPhase2.csv,Static
+108,testMoshe,Test,output\AG_ALL_SQL.sql,,Static
+109,Test ActiveIndicator,Test,output\ActiveIndicator.sql,Static_ActiveIndicator_Expected.CSV,Static
+110,Test ActiveIndicator_ExistingPOP,Test,output\ActiveIndicator_ExistingPOP.sql,Static_ActiveIndicator_ExistingPOP_Expected.CSV,Static
+111,Test ActiveIndicator2_ExistingPOP,Test,output\ActiveIndicator2_ExistingPOP.sql,Static_ActiveIndicator2_ExistingPOP.CSV,Static
+112,Test Test ActiveIndicator2,Test,output\ActiveIndicator2.sql,Static_ActiveIndicator2_Expected.CSV,Static
+113,Setup Cag ,Setup,input\setupCagPhase2.sql,,
+114,Test ActiveIndicatorComplex,Test,output\ActiveIndicatorComplex.sql,Static_ActiveIndicatorComplex_Expected.CSV,Static
+115,Test MCC Severity score,Test,output\MCCSeverityScore.sql,Static_MCC_Indicators_Expected.CSV,Static
+117,Test Provider Severity Score,Test,output\ProviderSeverityMDX.sql,output\ProviderSeverityDWH.sql,Dynamic
+118,readmission LACE In,Test,output\Readmission_LACE_MDX_Inpatient.sql,output\Readmission_LACE_In.sql,Dynamic
+119,readmission LACE Out,Test,output\Readmission_LACE_MDX_Outpatient.sql,output\Readmission_LACE_Out.sql,Dynamic
+120,Test LACE active indicators,Test,output\ActiveIndicatorForLACE.sql,Static_ActiveIndicaotrForLACE.CSV,Static
+121,Test LACE Severity score,Test,output\LACE_SeverityScore.sql,Static_LACESeverityScore.csv,Static
+122,Test LACE active indicator 2,Test,output\ActiveIndicatorForLACE.sql,Static_ActiveIndicaotrForLACE_2.CSV,Static
+123,Test LACE severity score 2,Test,output\LACE_SeverityScore.sql,Static_LACESeverityScore_2.CSV,Static
+124,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+125,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+126,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+127,Run PHA to CAG job,Setup,LoadJob_PHAtoCAG.sql,,
+128,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+129,Run PHA to CAG job,Setup,LoadJob_PHAtoCAG.sql,,
+130,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+131,Run PHA to CAG job,Setup,LoadJob_PHAtoCAG.sql,,
+132,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+133,Insert Patients,Setup,input\Patients.sql,,
+134,Insert Patients Relations,Setup,input\Factless PPO.sql,,
+135,Insert Dim Comb Disease,Setup,input\Comb_Disease.sql,,
+136,Insert Fact Admissions,Setup,input\Admissions.sql,,
+137,Insert Fact ED Visits,Setup,input\EDvisits.sql,,
+138,Insert Fact Ambulatory Visits,Setup,input\AmbVisits.sql,,
+139,Insert Fact Readmissions,Setup,input\ReAdm.sql,,
+140,Insert Summary Population,Setup,input\Population.sql,,
+143,Test Calc Per 1000,Test,output\Util_Calc_Per1000_Actual.sql,output\Util_Calc_Per1000_Expected.sql,Dynamic
+144,Test Admissions vs Ages,Test,output\Util_Adm_AgeGroups_Actual.sql,output\Util_Adm_AgeGroups_Expected.sql,Dynamic
+141,Run Analytics job,Setup,LoadJob.sql,,Static
+148,Test Ambulatory vs Ages,Test,output\Util_Amb_AgeGroups_Actual.sql,output\Util_Amb_AgeGroups_Expected.sql,Dynamic
+149,Test ED vs Ages,Test,output\Util_ED_AgeGroups_Actual.sql,output\Util_ED_AgeGroups_Expected.sql,Dynamic
+149,Test Readmissions vs Ages,Test,output\Util_ReAdm_AgeGroups_Actual.sql,output\Util_ReAdm_AgeGroups_Expected.sql,Dynamic
+145,Test Admissions vs Diseases,Test,output\Util_Adm_Disease_Actual.sql,output\Util_Adm_Disease_Expected.sql,Dynamic
+146,Test Admissions vs MCC score,Test,output\Util_Adm_MCC_Actual.sql,output\Util_Adm_MCC_Expected.sql,Dynamic
+149,Test Admissions vs MCC score,Test,,,Dynamic
+147,Test Admissions vs 17 Active conditions,Test,output\Util_Adm_17_Actual.sql,output\Util_Adm_17_Expected.sql,Dynamic
+149,Test ED vs MCC score,Test,output\Util_ED_MCC_Actual.sql,output\Util_ED_MCC_Expected.sql,Dynamic
+142,Test Distinct Patients vs Ages,Test,output\Util_DistinctPat_AgeGroups_Actual.sql,output\Util_DistinctPat_AgeGroups_Expected.sql,Dynamic
+150,Test ED vs Ages,Test,output\Util_ED_AgeGroups_Actual.sql,output\Util_ED_AgeGroups_Expected.sql,Dynamic
+151,Test Readmissions vs Ages,Test,output\Util_ReAdm_AgeGroups_Actual.sql,output\Util_ReAdm_AgeGroups_Expected.sql,Dynamic
+155,Test ED vs MCC score,Test,output\Util_ED_MCC_Actual.sql,output\Util_ED_MCC_Expected.sql,Dynamic
+156,ImmunizationsInsert,Test,output\Immunizations_DWH.sql,output\Immunizations_CAG.sql,Dynamic
+158,MedicationsInsert,Test,output\Medication_DWH.sql,output\Medication_CAG.sql,Dynamic
+159,Test Immunizations,Test,output\Immunizations_DWH.sql,output\Immunizations2_CAG.sql,Dynamic
+160,shualoni,Test,,,Static
+161,AllergiesInsert,Test,output\Allergies_DWH.sql,output\Allergies_CAG.sql,Dynamic
+162,Test Allergies,Test,output\Allergies_DWH.sql,output\Allergies_CAG _Phase2.sql,Dynamic
+163,Test Imaging,Test,,,Dynamic
+164,ImagingsInsert,Test,output\Imaging_DWH.sql,output\Imaging_CAG.sql,Dynamic
+165,Test Imaging,Test,output\Imaging_actual.sql,output\Imaging_expected.sql,Dynamic
+166,Test Code Links new,Test,output\CodeLinkDWHCnt4dimname.sql,output\CodeLinkCAGCnt4dimname.sql,Dynamic
+167,Test Pnemovax Scores MSSP,Test,output\pnemo scores tests actual.sql,output\pnemo scores tests expected.sql,Dynamic
+168,Test Imaging,Test,output\Imaging_DWH.sql,output\Imaging_CAG.sql,Dynamic
+169,Test MSSP cube Providers,Test,output\MSSP_Provider_MDX.sql,output\MSSP_Provider_SQL.sql,Dynamic
+170,Test MSSP Org,Test,output\MSSP_Org_MDX.sql,output\MSSP_Org_SQL.sql,Dynamic
+171,Test Pnemovax Scores MSSP,Test,output\Pnemo_scores_actual.sql,output\Pnemo_scores_expected.sql,Dynamic
+172,Test Pneumovax DWH,Test,output\PneumovaxfromMSSP.sql,output\PneumovaxFromAI.sql,Dynamic
+173,Test MSSP Cube Provider Phase 2,Test,output\MSSP_Provider_MDX.sql,output\MSSP_Provider_SQL.sql,Dynamic
+174,Test MSSP Pneumovax Org Phase 2,Test,output\MSSP_Org_MDX.sql,output\MSSP_Org_SQL.sql,Dynamic
+175,Test Pneumovax DWH-2,Test,output\PneumovaxfromMSSP.sql,output\PneumovaxFromAI.sql,Dynamic
+176,Test HBA1C Scores MSSP,Test,output\HBA1C_AI_scores_actual.sql,output\HBA1C_AI_scores_expected.sql,Dynamic
+177,Test HBA1C DWH,Test,output\HBA1CfromMSSP.sql,output\HBA1CFromAI.sql,Dynamic
+178,TEST MSSP AttributedPatientsScore,Test,output\AttributedPatientsScore_MDX.sql,output\AttributedPatientsScore_DWH.sql,Dynamic
+179,mssp IVD,Test,output,output\mssp_ivd_expected.sql,Dynamic
+180,IVD phase 2,Test,output\mssp_ivd_act.sql,output\mssp_ivd_expected.sql,Dynamic
+181,Fact_SumTotalRank ,Test,output\Fact_SumTotalRank_Actual_SQL.sql,output\Fact_SumTotalRank_Expected_SQL.sql,Dynamic
+182,Fact_Severity_Score,Test,output\Fact_Severity_Score_Actual_SQL.sql,output\Fact_Severity_Score_Expected_SQL.sql,Dynamic
+183,KPISumMonthly_Denum,Test,output\KPISumMonthly_Denum_Actual_SQL.sql,output\KPISumMonthly_Denum_expected_SQL.sql,Dynamic
+184,KPISumMonthly_Num,Test,output\KPISumMonthly_Num_Actual_SQL.sql,output\KPISumMonthly_Num_expected_SQL.sql,Dynamic
+185,factless.ValueSet,Test,output\ValueSet_cnt_for_static.sql,Static_ValueSet_cnt.csv,Static
+186,MSSP in Fact.ActiveIndicators,Test,output\MSSP_Indicators.sql,Static_MSSP_Indicators.csv,Static
+187,metricsFromMssp,Test,output\mssp_scores_actual.sql,output\mssp_expected_AI.sql,Dynamic
+188,Test_MDX_care_mssp_month,Test,output\MSSP_Provider_Metrics_Month_MDX.sql,output\MSSP_Provider_Metrics_Month_SQL.sql,Dynamic
+189,Test_MDX_care_mssp_month,Test,output\MSSP_Provider_Metrics_Month_MDX.sql,output\MSSP_Provider_Metrics_Month_SQL.sql,Dynamic
+190,update services table,Setup,input\insertServices.sql,,Static
+191,Run sync cube,Setup,LoadJobCube.sql,,Static
+192,Test MSSP Score,Test,output\MSSP_Score_MDX,output\MSSP_Score_SQL.sql,Dynamic
+193,Test MSSP indicators phase 2,Test,output\MSSP_Indicators.sql,Static_MSSP_Indicators_phase2.csv,Static
+194,MSTR Main MSSP Data set,Test,output\MainMSSP_MDX.sql,output\MainMSSP_SQL.sql,Dynamic
+195,MSTR MSSP Compare Data Set care Provider ImpN1,Test,output\MSSPCompare_CareProvider_All_ImpN1_MDX.sql,output\MSSPCompare_CareProvider_All_ImpN1_SQL.sql,Dynamic
+196,MSTR MSSP Compare Data Set care Provider ImpN2,Test,output\MSSPCompare_CareProvider_All_ImpN2_MDX.sql,output\MSSPCompare_CareProvider_All_ImpN2_SQL.sql,Dynamic
+197,MSTR MSSP Compare Data Set Org ImpN1,Test,output\MSSPCompare_Org_All_ImpN1_MDX.sql,output\MSSPCompare_Org_All_ImpN1_SQL.sql,Dynamic
+198,MSTR MSSP Compare Data Set Org ImpN2,Test,output\MSSPCompare_Org_All_ImpN2_MDX.sql,output\MSSPCompare_Org_All_ImpN2_SQL.sql,Dynamic
+199,SeverityScoreInPatientList,Test,output\SeverityScoreInPatientList_MDX.sql,output\SeverityScoreInPatientList_DWH.sql,Dynamic
+200,Dim Program Data,Test,output\Mirror_Dim_Program.sql,output\DW_Dim_Program.sql,Dynamic
+201,Persist Patient Program Relations Data,Test,output\Mirror_Program_patient.sql,output\Persist_Program_patient.sql,Dynamic
+202,insert programs and codes,Setup,input\insertPrograms.sql,,Dynamic
+203,Readmissions Payor,Test,output\Readmissions_Payor_MDX.sql,output\Readmissions_Payor_SQL.sql,Dynamic
+204,Test Program,Test,output\ProgPatientsRelationActual.sql,output\ProgPatientsRelationExpeted.sql,Dynamic
+205,Test dim.Program Cube,Test,output\ProgramAG_KPI_MDX.sql,output\program_AG_KPI_SQL.sql,Dynamic
+206,Dynamic tests for ValueSets,Test,output\VS_new_test_actual.sql,output\VS_new_test_expected.sql,Dynamic
+207,SetAdmincodesForClaimsMarge,Setup,input\SetAdmincodesForClaimsMarge.sql,,Static
+208,Test Clams Marge Fact Procedures,Test,output\Marge_Claims_To_Fact_Procedures_Actual.sql,output\Marge_Claims_To_Fact_Procedures_Expected.sql,Dynamic
+209,Insert Data KnowledgeModules+KmResults,Setup,output\Building Blocks insert to Persist Setup.sql,,Dynamic
+210,Create Building Blocks,Setup,output\Building Blocks XML Setup.sql,,Dynamic
+211,Run rule editor Job,Setup,LoadRuleEditorJob.sql,,Dynamic
+212,BuildingBlocks Test ,Test,output\Building Blocks Actual.sql,output\Building Blocks Expected.sql,Dynamic
+213,Metrics XML setUp,Setup,output\Metrics XML Setup.sql,,Dynamic
+214,Metric Tests,Test,output\Actual_Metrics.sql,output\Expected_Metrics.sql,Dynamic
+215,config_MetricsSQL,Test,output\config_MetricsSQL.sql,output\Static_ConfigMetricSQL.sql,Dynamic
+216,config_MetricsElementsExpressions,Test,output\config_MetricsElementsExpressions.sql,Static_ConfigMetricsElementsExpressions.csv,Static
+217,config_MetricsDefinitions,Test,output\config_MetricsDefinitions.sql,Static_ConfigMetricsDefinitions.csv,Static
+218,Test Claims Merge Fact Conditions,Test,output\Marge_Claims_To_Fact_Conditions_Actual.sql,output\Marge_Claims_To_Fact_Conditions_Expected.sql,Dynamic
+219,Insert Patient Program Relations,Setup,input\insertProgramsPhase2.sql,,Static
+220,Test Claims Merge Fact Encounters AMB,Test,output\Marge_Claims_To_Fact_Encounter_AMB_Actual.sql,output\Marge_Claims_To_Fact_Encounters_AMB_Expected.sql,Dynamic
+221,Test Claims Merge Fact Encounters IMP,Test,output\Marge_Claims_To_Fact_Encounter_IMP_Actual.sql,output\Marge_Claims_To_Fact_Encounters_IMP_Expected.sql,Dynamic
+222,Test Claims Merge Fact Imaging,Test,output\Marge_Claims_To_Fact_Imaging_Actual.sql,output\Marge_Claims_To_Fact_Imaging_Expected.sql,Dynamic
+223,Test Claims Merge Fact Immunizations,Test,output\Marge_Claims_To_Fact_Immunizations_Actual.sql,output\Marge_Claims_To_Fact_Immunizations_Expected.sql,Dynamic
+224,Run Claims job ,Setup,LoadClaimsJob.sql,,
+225,Test Claims Merge Immunizations,Test,output\Merge_Claims_To_Fact_Immunizations_DWH.sql,output\Merge_Claims_To_Fact_Immunizations_Persist.sql,Dynamic
+226,Test Claims Merge Procedures,Test,output\Merge_Claims_To_Fact_Procedures_DWH.sql,output\Merge_Claims_To_Fact_Procedures_Persist.sql,Dynamic
+227,Test Claims Merge Conditions,Test,output\Merge_Claims_To_Fact_Conditions_DWH.sql,output\Merge_Claims_To_Fact_Conditions_Persist.sql,Dynamic
+228,Test Claims Merge Encounters AMB,Test,output\Merge_Claims_To_Fact_Encounter_AMB_DWH.sql,output\Merge_Claims_To_Fact_Encounters_AMB_Persist.sql,Dynamic
+229,Test Claims Merge Encounters IMP,Test,output\Marge_Claims_To_Fact_Encounter_IMP_Actual.sql,output\Marge_Claims_To_Fact_Encounters_IMP_Expected.sql,Dynamic
+230,Test Claims Merge Encounters IMP,Test,output\Merge_Claims_To_Fact_Encounter_IMP_DWH.sql,output\Merge_Claims_To_Fact_Encounters_IMP_Persist.sql,Dynamic
+231,Test Claims Merge Imaging,Test,output\Merge_Claims_To_Fact_Imaging_DWH.sql,output\Merge_Claims_To_Fact_Imaging_Persist.sql,Dynamic
+232,Fact_Claims_lines_staticData_PatientRelationsFromTo,Setup,input\Fact_Claims_lines_staticData_PatientRelationsFromTo.sql,,Static
+233,Test Fact_ClaimsLines,Test,output\Fact_ClaimsLines_DWH.sql,output\Fact_ClaimsLines_STG.sql,Dynamic
+234,Test Fact_ClaimsLines Update Row,Test,output\Fact_ClaimsLines_Update_DWH.sql,output\Fact_ClaimsLines_STG.sql,Dynamic
+235,Test ClaimsClinicalData Mirror to Dwh,Test,output\Fact_ClaimsClinicalData_DWH.sql,output\Fact_ClaimsClinicalData_STG.sql,Dynamic
+236,Update ClaimsClinicalData,Setup,output\Update_ClaimsClinicalData.sql,,
+237,Test the update of ClaimsClinicalData,Test,output\Fact_ClaimsClinicalData_Actual_SQL.sql,output\FactClaimClinicalData Test updated Expected.sql,Dynamic
+238,Test FactMedicationSupply after merge,Test,output\Test Medication supply-claim DWH.sql,output\Test medication supply-claim CAG.sql,Dynamic
+238,ClinicalDocumentInsert,Test,output\ClinicalDocumentAct.sql,output\ClinicalDocumentEXP.sql,Dynamic
+239,ClinicalDocumentInsert,Test,output\ClinicalDocument_DWH.sql,output\ClinicalDocument_CAG.sql,Dynamic
+240,ClinicalDocumentInsert,Test,output\ClinicalDocumentAct.sql,output\ClinicalDocumentEXP.sql,Dynamic
+241,,,,,
+242,ProceduresInsert,Test,output\Procedure_DWH.sql,output\Procedure_CAG.sql,Dynamic
+243,Test Claims Merge Encounters IMP EMER,Test,output\Merge_Claims_To_Fact_Encounter_EMER_DWH.sql,output\Merge_Claims_To_Fact_Encounters_EMER_Persist.sql,Dynamic
+244,Insert Data Into CAG ,Setup,input\CAG_DataLoading10.sql,,Static
+245,Take All Admin Codes,Setup,input\TakeAllCodes.sql,,Static
+246,PatientsAddUpdDel,Test,output\Patient_DWH.sql,output\Patient_CAG.sql,Dynamic
+247,PCPAddUpdDel,Test,output\PCP_DWH.sql,output\PCP_CAG.sql,Dynamic
+248,ProceduresAddUpdDel,Test,output\Procedure_DWH.sql,output\Procedure_CAG.sql,Dynamic
+249,ImagingsAddUpdDel,Test,output\Imaging_DWH.sql,output\Imaging_CAG.sql,Dynamic
+250,ImmunizationsAddUpdDel,Test,output\Immunizations_DWH.sql,output\Immunizations_CAG.sql,Dynamic
+251,ConditionsAddUpdDel,Test,output\Conditions_DWH.sql,output\Conditions_CAG.sql,Dynamic
+245,Take All Admin Codes,Setup,input\TakeAllCodes.sql,,Static
+253,Run Cliams Job UpsertTest for all ClinicDomains/Metrics/ClaimsInsert,Setup,LoadClaimsJob.sql,,
+254,Setup CAG,Setup,,,
+255,Load data to CAG,Setup,input\DataLoadingPhase2.SQL,,
+256,Run sync job,Setup,LoadJob.sql,,
+257,Fact_Claims_lines_staticData_PatientRelationsFromTo,Setup,input\Fact_Claims_lines_staticData_PatientRelationsFromTo.sql,,
+258,Insert Patient Program Relations,Setup,input\insertProgramsPhase2.sql,,
+259,Analytics Providers,Test,output\Provider_DWH.sql,output\Provider_CAG.sql,Dynamic
+260,Fact Conditions,Test,output\Conditions_Actual.sql,output\Conditions2_Expected.sql,Dynamic
+261,Fact Labs Order phase2,Test,output\LabsOrder2_DWH.sql,output\LabsRequest2_CAG.sql,Dynamic
+262,Fact Labs Result Phase2 ,Test,output\LabsResult2_DWH.sql,output\LabsResult2_CAG.sql,Dynamic
+263,Measurement2 ,Test,output\Measurement2_DWH.sql,output\Measurement2_CAG.sql,Dynamic
+264,Medications lnsert,Test,output\Medication_DWH.sql,output\Medication_CAG.sql,Dynamic
+265,Immunizations,Test,output\Immunizations_DWH.sql,output\Immunizations2_CAG.sql,Dynamic
+266,Allergies,Test,output\Allergies_DWH.sql,output\Allergies_CAG _Phase2.sql,Dynamic
+267,Imaging,Test,output\Imaging_DWH.sql,output\Imaging_CAG.sql,Dynamic
+268,Pneumovax DWH-2,Test,output\PneumovaxfromMSSP.sql,output\PneumovaxFromAI.sql,Dynamic
+269,IVD phase 2,Test,output\mssp_ivd_act.sql,output\mssp_ivd_expected.sql,Dynamic
+270,s,Test,output\Merge_Claims_To_Fact_Immunizations_DWH.sql,output\Merge_Claims_To_Fact_Immunizations_Persist.sql,Dynamic
+271,Claims Merge Procedures ,Test,output\Merge_Claims_To_Fact_Procedures_DWH.sql,output\Merge_Claims_To_Fact_Procedures_Persist.sql,Dynamic
+272,Claims Merge Conditions,Test,output\Merge_Claims_To_Fact_Conditions_DWH.sql,output\Merge_Claims_To_Fact_Conditions_Persist.sql,Dynamic
+273,Claims Merge Encounters AMB,Test,output\Merge_Claims_To_Fact_Encounter_AMB_DWH.sql,output\Merge_Claims_To_Fact_Encounters_AMB_Persist.sql,Dynamic
+274,Claims Merge Encounters IMP,Test,output\Merge_Claims_To_Fact_Encounter_IMP_DWH.sql,output\Merge_Claims_To_Fact_Encounters_IMP_Persist.sql,Dynamic
+275,Claims Merge Imaging,Test,output\Merge_Claims_To_Fact_Imaging_DWH.sql,output\Merge_Claims_To_Fact_Imaging_Persist.sql,Dynamic
+276,Fact ClaimsLines,Test,output\Fact_ClaimsLines_DWH.sql,output\Fact_ClaimsLines_STG.sql,Dynamic
+277,Fact_ClaimsLines Update Row,Test,output\Fact_ClaimsLines_Update_DWH.sql,output\Fact_ClaimsLines_CAG.sql,Dynamic
+278,Claims ClinicalData Mirror to Dwh,Test,output\Fact_ClaimsClinicalData_DWH.sql,output\Fact_ClaimsClinicalData_STG.sql,Dynamic
+279,Claims Merge Medication Supply,Test,output\Merge Claims Medication DWH.sql,output\Merge Claims Medication Persist.sql,Dynamic
+280,Claims Merge Encounters IMP EMER,Test,output\Merge_Claims_To_Fact_Encounter_EMER_DWH.sql,output\Merge_Claims_To_Fact_Encounters_EMER_Persist.sql,Dynamic
+281,Insert data into Cag,Setup,input\CAG_DataLoading11.sql,,Static
+282,Provider,Test,output\Provider_DWH.sql,output\Provider_CAG.sql,Dynamic
+283,Encounters,Test,Phase 11\Actual\Encounters_DWH.sql,Phase 11\Expected\Encounters_CAG.sql,Dynamic
+284,Medication,Test,Phase 11\Actual\Medication_DWH.sql,Phase 11\Expected\Medication_CAG.sql,Dynamic
+285,Allergies,Test,Phase 11\Actual\Allergies_DWH.sql,Phase 11\Expected\Allergies_CAG.sql,Dynamic
+286,Measurement,Test,Phase 11\Actual\Measurement_DWH.sql,Phase 11\Expected\Measurement_CAG.sql,Dynamic
+287,Labs Order,Test,Phase 11\Actual\LabsOrder_DWH.sql,Phase 11\Expected\LabsOrder_CAG.sql,Dynamic
+288,Labs Result,Test,Phase 11\Actual\LabsResult_DWH.sql,Phase 11\Expected\LabsResult_CAG.sql,Dynamic
+289,Fact Patient Program Relation,Test,output\STG_Patient_Program.sql,output\Fact_Patient_Program.sql,Dynamic
+290,Fact Patient Program Relation,Test,output\STG_Patient_Program.sql,output\Fact_Patient_Program.sql,Dynamic
+291,Fact Patient Relation,Test,output\Fact_Ambulatory_Visits.sql,output\Fact_Patient_Relations.sql,Dynamic
+292,CPM Admission,Test,output\CPMAdmissions_DWH.sql,output\CPMAdmissions_CAG.sql,Dynamic
+293,CPM Amb,Test,output\CPMAmb_DWH.sql,output\CPMAmb_CAG.sql,Dynamic
+294,CPM ED,Test,output\CPMED_DWH.sql,output\CPMED_CAG.sql,Dynamic
+295,insert Provider Organization,Setup,input\insert Provider_Organization.sql,,Dynamic
+296,insert Factless Pro Org Relation,Test,output\Mirror_Provider_Organization.sql,output\Factless_Provider_Organization.sql,Dynamic
+297,Fact Patient Relation(Pro Org),Test,output\PatientProviderOrganization.sql,output\Fact_Patient_Relation_from_Provider_organization.sql,Dynamic
+298,update provider organization,Setup,input\update Provider_Organization.sql,,Dynamic
+299,update Provider Organization,Test,output\update_Mirror_Provider_Organization.sql,output\update_Factless_Provider_Organization.sql,Dynamic
+300,update Patient Relation,Test,output\update_PatientProviderOrganization.sql,output\update_Fact_Patient_Relation_from_Provider_organization.sql,Dynamic
+301,Population Age,Test,output\PopSum_Age.sql,output\PopCalc_Age.sql,Dynamic
+302,Population Org,Test,output\PopSum_Org.sql,output\PopCalc_Org.sql,Dynamic
+303,Population Provider,Test,output\PopSum_Provider.sql,output\PopCalc_Provider.sql,Dynamic
+304,Measure Age,Test,output\MeasureSum_Age.sql,output\MeasureCalc_Age.sql,Dynamic
+305,Measure Org,Test,output\MeasureSum_Org.sql,output\MeasureCalc_Org.sql,Dynamic
+306,Measure Provider,Test,output\MeasureSum_Provider.sql,output\MeasureCalc_Provider.sql,Dynamic
+307,Population Dates,Test,output\PopSum_Date.sql,output\PopCalc_Date.sql,Dynamic
+308,Measure Dates,Test,output\MeasureSum_Date.sql,output\MeasureCalc_Date.sql,Dynamic
+309,Check Duplicates of Codes and Links,Test,output\CodesDuplicateCounter.sql,output\Static_Code_Check.sql,Dynamic
+310,Claims Merge Labs Order,Test,output\Merge_Claims_To_Fact_Labs_Order_DWH.sql,output\Merge_Claims_To_Fact_Labs_Order_Persist.sql,Dynamic
+311,Claims Merge Labs Result,Test,output\Merge_Claims_To_Fact_Labs_DWH.sql,output\Merge_Claims_To_Fact_Labs_Persist.sql,Dynamic
+312,Code Links,Test,output\CodeLinkDWHCnt4dimname.sql,output\CodeLinkCAGCnt4dimname.sql,Dynamic
+313,Claims Insert into fact AmbulatoryVisits,Test,output\Insert_Claims_To_Fact_Encounter_AMB_DWH.sql,output\Insert_Claims_To_Fact_Encounters_AMB_CAG.sql,Dynamic
+314,Claims Insert into Fact procedures,Test,output\Insert_Claims_To_Fact_Procedures_DWH.sql,output\Insert_Claims_To_Fact_Procedures_CAG.sql,Dynamic
+315,Claims Insert into Fact Admissions IMP,Test,output\Insert_Claims_To_Fact_Encounter_IMP_DWH.sql,output\Insert_Claims_To_Fact_Encounters_IMP_CAG.sql,Dynamic
+316,Claims Insert into Fact EDVisits EMER,Test,output\Insert_Claims_To_Fact_Encounter_EMER_DWH.sql,output\Insert_Claims_To_Fact_Encounters_EMER_CAG.sql,Dynamic
+317,Claims Insert into Fact Imaging,Test,output\Insert_Claims_To_Fact_Imaging_DWH.sql,output\Insert_Claims_To_Fact_Imaging_CAG.sql,Dynamic
+318,ClinicalDocument,Test,output\ClinicalDocument_DWH.sql,output\ClinicalDocument_CAG.sql,Dynamic
+319,,,,,
+320,,,,,
+321,Backup Test for all Domains,,Backup Test for all Domains,Backup Test for all Domains,Static
+322,Bootstrap Test ,,Bootstrap Test for all Domain and Metrics ,Bootstrap Test for all Domain and Metrics ,Static
+324,Upsert Test  ,,Upsert Test for internal Provider/Organization relation ,Upsert Test for internal Provider/Organization relation ,Static
+325,Bootstrap Test ,,Bootstrap Test for internal Provider/Organization relation ,Bootstrap Test for internal Provider/Organization relation,Static
+326,LoadJob2,,LoadJobPhase2.sql,,Dynamic
+328,InsertEncounters,Test,output\ActualEncountersPhase7.sql,output\InsertEncountersToCAGPhase7.sql,Dynamic
+329,Insert Data Into CAG,Setup,input\LoadDataToCAGPhase7.sql,,Static
+330,Run sync job,Setup,LoadJob.sql,,Dynamic
+331,TruncateRemoteCAG-Site1,Setup,Input\DeleteRemoteCag1.sql,,Static
+332,insert programs,Setup,input\insertProgramsPh7.sql,,Static
+333,InsertRemoteCodes-Site1,Setup,input\InsertRemoteCodes1.sql,,Static
+334,Insert Data Remote CAG-Site1,Setup,input\CAG_DataLoadingSites1.sql,,Static
+335,ConfigSites and Parameters,Setup,input\ConfigSites and Parameters.sql,,Static
+336,**Setup for PHA Lites - Site1**,,**Setup for PHA Lites - Site1**,**Setup for PHA Lites - Site1**,Dynamic
+337,**Setup for PHA Lites - Site2**,,**Setup for PHA Lites - Site2**,**Setup for PHA Lites - Site2**,Dynamic
+338,TruncateRemoteCAG-Site2,Setup,Input\DeleteRemoteCag2.sql,,Static
+339,InsertRemoteCodes-Site2,Setup,input\InsertRemoteCodes2.sql,,Static
+340,Insert Data Remote CAG-Site2,Setup,input\CAG_DataLoadingSites2.sql,,Static
+341,Guide for Phase 7 - Please Read Me!!,,input\GuideP7.sql,,
+342,ParametersSite1,Setup,input\ParametersSite1.sql,,Static
+343,ParametersSite2,Setup,input\ParametersSite2.sql,,Static
+344,LoadJobSite1,Setup,input\LoadJobSite1.sql,,Static
+345,LoadJobSite2,Setup,input\LoadJobSite2.sql,,Static
+346,Truncate CARS STG,Setup,input\DELETE_dbmSemanticAnalyticsSTG.sql,,Static
+347,Truncate CARS DWH,Setup,input\Delete_dbmSemanticAnalytics.sql,,
+348,OrganizationInsert,Test,output\Organization_DWH.sql,output\Organization_CAGsql.sql,Dynamic
+349,Organization,Test,output\Organization_DWH.sql,output\Organization_CAGsql.sql,Dynamic
+350,InsertOrganization,Test,output\OrganizationP7_DWH.sql,,Dynamic
+351,InsertProvider,Test,output\ProviderP7_DWH.sql,,Dynamic
+352,claim total charge amount,Test,output\Claims_total_charge_amount_DWH.sql,output\Claims_total_charge_amount_Persist.sql,Dynamic
+351,,,,,
+352,,,,,
+353,Insert Data for CQM,Setup,input\CQM_Data_Loading.sql,,Static
+354,Metric CQM per Provider,Test,output\Fact_Metrics_CQM_Provider_Actual_SQL.sql,output\Fact_Metrics_CQM_Provider_Expected_SQL.sql,Dynamic
+355,Metric CQM per Practice,Test,output\Fact_Metrics_CQM_Practice_Actual_SQL.sql,output\Fact_Metrics_CQM_Practice_Expected_SQL.sql,Dynamic
+356,Metric CQM per Metric Key,Test,output\Fact_Metrics_CQM_MetricKey_Actual_SQL.sql,output\Fact_Metrics_CQM_MetricKey_Expected_SQL.sql,Dynamic
+357,Metric CQM Summerized per Metric ID,Test,output\Fact_Metrics_Summerized_metricID_Actual_SQL.sql,output\Fact_Metrics_Summerized_metricID_Expected_SQL.sql,Dynamic
+358,Metric CQM Summerized-Score per Metric ID,Test,output\Fact_Metrics_Summerized_ScoreMetricByDate_Actual_SQL.sql,output\Fact_Metrics_Summerized_ScoreMetricByDate_Expected_SQL.sql,Dynamic
+359,Truncate tables for CQM,Setup,input\Delete_Tables_For_CQM.sql,,Static
+360,Clear patient key ,Setup,input\ClearIdPatient.sql,,Static
+361,Insert_Into_Cag_10_Test_Patient,Setup,input\10_Patients_Data.sql,,Static
+362,Truncate local Claims,Setup,input\DeleteClaims_ACG.sql,,Static
+363,Truncate local STG,Setup,input\DELETE_dbmSemanticAnalyticsSTG.sql,,Static
+364,Truncate local STG,Setup,,,Static
+365,Truncate local DWH,Setup,input\Delete_dbmSemanticAnalytics.sql,,Static
+366,Run Cliams Job UpsertTest for all ClinicDomains/Metrics/ClaimsInsert,Setup,LoadClaimsJob.sql,,
+367,Insert data to CAG,Setup,input\CAG_DataLoading11.sql,,Static
+368,Run sync job,Setup,LoadJob.sql,,Dynamic
+369,Truncate local CAG,Setup,input\DeleteCag.sql,,Static
+370,Remove Existing Claims Data,Setup,input\DeleteClaims_ACG.sql,,Static
+371,Claims Patient Count,Test,output\Claims_PAT_Count_Persist.sql,output\Claims_PAT_Count_ACG.sql,Dynamic
+372,Claims Patient Name,Test,output\Claims_PATName_Persist.sql,output\Claims_PATName_ACG.sql,Dynamic
+373,Calims Patient Blank Name,Test,output\Claims_PATBlankName_Persist.sql,output\Claims_PATBlankName_ACG.sql,Dynamic
+374,Claims Patient Blank ID,Test,output\Claims_PATBlankID_Persist.sql,output\Claims_PATBlankID_ACG.sql,Dynamic
+375,Diphi Exe Run,Setup,input\CCLF9RuncallExe.sql,,Static
+376,Diphi Exe Run,Setup,input\CCLF9RuncallExe.sql,,Static
+377,Conditions,Test,output\Conditions.sql,output\ConditionsExpected.sql,Dynamic
+378,Imaging,Test,output\Imaging.sql,output\ImagingExpected.sql,Dynamic
+379,LaboratoriesOrder,Test,output\LaboratoriesOrder.sql,output\LaboratoriesOrderExpected.sql,Dynamic
+380,LaboratoriesResult,Test,output\LaboratoriesResult.sql,output\LaboratoriesResultExpected.sql,Dynamic
+381,MedicationOrders,Test,output\MedicationOrders.sql,output\MedicationOrdersExpected.sql,Dynamic
+382,MedicationSupplies,Test,output\MedicationSupplies.sql,output\MedicationSuppliesExpected.sql,Dynamic
+383,ClinicalDocument,Test,output\ClinicalDocument.sql,output\ClinicalDocumentExpected.sql,Dynamic

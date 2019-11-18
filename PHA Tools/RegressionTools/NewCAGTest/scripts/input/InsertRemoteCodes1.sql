@@ -1,0 +1,1 @@
+exec xp_cmdshell 'sqlcmd -S dbm8-data112\inst02 -i "C:\Program Files\Common Files\Regression\Input\InsertRemoteCodes1.sql" -o "C:\Program Files\Common Files\Regression\Output\InsertRemoteCodes1Out.sql"'

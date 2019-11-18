@@ -1,0 +1,161 @@
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24,23,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,102,104,106,109,110,114,115,116,117,120,121,156,157,158,159;113,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,103,105,107,111,112,122,123,158,159;77,78,79,80,81,82,83,84,85,86,87,88,89,35,36,37,38,39,40,41,42,98,99,100,101,49,50,51,52,53,118,119;131,132;133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,150,151,152,153,154,155
+ID,Test_Name,Tag,Script_Actual,Script_Expected,Type
+1,Truncate local CAG,Setup,input\DeleteCag.sql,,Static
+2,Truncate local STG,Setup,input\DELETE_dbmSemanticAnalyticsSTG.sql,,Static
+3,Truncate local DWH,Setup,input\Delete_dbmSemanticAnalytics.sql,,Static
+4,Load data to CAG,Setup,input\DataLoadingPhase1.SQL,,Static
+5,Set SLR Local,Setup,input\SetSLRLocal.sql,,Static
+6,Run sync job,Setup,LoadJob.sql,,Static
+7,Test Analytics_Encounters,Test,output\Anal_DWH_check.sql,Static_INSERT_Encounters.txt,Static
+8,Test Persist_Imaging,Test,output\Img_Out_Persist_check.sql,Static_ImgOutputPersistStep1.txt,Static
+9,Test Analytics_Patients,Test,output\Patient_DWH.sql,output\Patient_CAG.sql,Dynamic
+10,Test Analytics_Providers,Test,output\Provider_DWH.sql,output\Provider_CAG.sql,Dynamic
+11,Test Readmissions,Test,output\ReadmissionsOutputStep1.sql,Static_ReadmissionsOutputStep1.txt,Static
+12,Test ReadmissionRate,Test,output\ReadmissionRateMDX.sql,output\ReadmissionRateDWH.sql,Dynamic
+13,Test PCP,Test,output\Output_PCP.sql,Static_Output_PCP.txt,Static
+14,Test PCPOrg,Test,output\Output_PatientRelationOrg.sql,Static_Output_PatientRelationOrg.txt,Static
+15,Test ReadmissionRateCohort,Test,output\ReadmissionRateCohortMDX.sql,output\ReadmissionRateCohortDWH.sql,Dynamic
+16,Test ReadmissionRateOrg,Test,output\ReadmissionRateOrgMDX.sql,output\ReadmissionRateOrgDWH.sql,Dynamic
+17,Test FUVRate,Test,output\FUVRateMDX.sql,output\FUVRateDWH.sql,Dynamic
+18,Test LOS_OUT_Rate,Test,output\LOS_OUT_MDX.sql,output\LOS_OUT_DWH.sql,Dynamic
+19,Test FUV_Out_Rate,Test,output\FUV_Out_MDX.sql,output\FUV_Out_DWH.sql,Dynamic
+20,Test reRate_Out,Test,output\reRate_Out_MDX.sql,output\reRate_Out_DWH.sql,Dynamic
+21,Test admited_rate_out,Test,output\admited_rate_out_MDX.sql,output\admited_patient_rate_out_DWH.sql,Dynamic
+22,Test ReRate In DTR,Test,output\RERateInDtrSQL.sql,output\RERateInDtrMDX.sql,Dynamic
+23,Test ReRate Out DTR,Test,output\RERateOutDtrSQL.sql,output\RERateOutDtrMDX.sql,Dynamic
+24,Test DWH_Procedures,Test,output\Procedures_DWH.sql,Static_Procedures_DWH_Result.txt,Static
+25,Test Diff_MeasuresMembersMonthly1,Test,output\MeasuresMembersMonthly_Actual.sql,Static_MeasuresMembersMonthly.txt,Static
+26,Test Diff_PopulationMembersMonthly1,Test,output\PopulationMembersMonthly_Actual.sql,Static_PopulationMembersMonthly.txt,Static
+27,Test Diff_CPMDiseaseCalcs,Test,output\DiseaseScoreMDX.sql,output\DiseaseScoreDWH.sql,Dynamic
+28,Test CPM Admission,Test,output\CPMAdmissions_Actual.sql,output\CPMAdmissions_Expected.sql,Dynamic
+29,Test CPM Amb,Test,output\CPMAmb_Actual.sql,output\CPMAmb_Expected.sql,Dynamic
+30,Test CPM ED,Test,output\CPMED_Actual.sql,output\CPMED_Expected.sql,Dynamic
+31,Test AdminCodes and ClinicalCodes,Test,output\Codes_Actual.sql,output\Codes_Expected.sql,Dynamic
+32,Test Fact Conditions,Test,output\Conditions_Actual.sql,output\Conditions_Expected.sql,Dynamic
+33,Test Fact Labs Order,Test,output\LabsOrder_Actual.sql,output\LabsRequest_Expected.sql,Dynamic
+34,Test Fact Labs Result,Test,output\LabsResult_Actual.sql,output\LabsResult_Expected.sql,Dynamic
+35,Test Population Age,Test,output\PopSum_Age.sql,output\PopCalc_Age.sql,Dynamic
+36,Test Population Org,Test,output\PopSum_Org.sql,output\PopCalc_Org.sql,Dynamic
+37,Test Population Provider,Test,output\PopSum_Provider.sql,output\PopCalc_Provider.sql,Dynamic
+38,Test Measure Age,Test,output\MeasureSum_Age.sql,output\MeasureCalc_Age.sql,Dynamic
+39,Test Measure Org,Test,output\MeasureSum_Org.sql,output\MeasureCalc_Org.sql,Dynamic
+40,Test Measure Provider,Test,output\MeasureSum_Provider.sql,output\MeasureCalc_Provider.sql,Dynamic
+41,Test Population Dates,Test,output\PopSum_Date.sql,output\PopCalc_Date.sql,Dynamic
+42,Test Measure Dates,Test,output\MeasureSum_Date.sql,output\MeasureCalc_Date.sql,Dynamic
+43,Test Diesease Gender,Test,output\Disease_Gender_Kpi_SQL.sql,output\Disease_Gender_Kpi_MDX.sql,Dynamic
+44,Test Gender,Test,output\Gender_Kpi_SQL.sql,output\Gender_Kpi_MDX.sql,Dynamic
+45,Test Gender KPI,Test,output\Gender_Kpi_cqm_MDX.sql,output\Gender_Kpi_cqm_SQL.sql,Dynamic
+46,Test Age Group KPI,Test,output\AG_KPI_MDX.sql,output\AG_KPI_SQL.sql,Dynamic
+47,Test Disease AgeGroup,Test,output\Disease_AgeGroup_Kpi_MDX.sql,output\Disease_AgeGroup_Kpi_SQL.sql,Dynamic
+48,Test Age Group ALL,Test,output\AG_ALL_MDX.sql,output\AG_ALL_SQL.sql,Dynamic
+49,Test Disease Org,Test,output\DiseaseOrgMDX.sql,output\DiseaseOrgSQL.sql,Dynamic
+50,Test for PatientList,Test,output\PatientList_PatientRank_MDX.sql,output\PatientList_PatientRank_DWH.sql,Dynamic
+51,Test KPI Org,Test,output\KPIOrgMDX.sql,output\KPI_ORG_DWH.sql,Dynamic
+52,Test Date KPI,Test,output\Dates_KPI_MDX.sql,output\Dates_KPI_SQL.sql,Dynamic
+53,Test Date Disease,Test,output\Dates_Disease_MDX.sql,output\Dates_Disease_SQL.sql,Dynamic
+54,Load data to CAG Phase2,Setup,input\DataLoadingPhase2.SQL,,
+55,Run sync job Phase2,Setup,LoadJob.sql,,
+56,Test Analytics_Patients2,Test,output\Patient_DWH.sql,output\Patient_CAG.sql,Dynamic
+57,Test Analytics_Providers2,Test,output\Provider_DWH.sql,output\Provider_CAG.sql,Dynamic
+58,Test PCP2,Test,output\Output_PCP.sql,Static_Output_PCP2.txt,Static
+59,Test PCPOrg2,Test,output\Output_PatientRelationOrg.sql,Static_Output_PatientRelationOrg2.txt,Static
+60,Test Readmissions2,Test,output\ReadmissionsOutputStep1.sql,Static_ReadmissionsOutputStep2.txt,Static
+61,Test ReadmissionRate2,Test,output\ReadmissionRateMDX.sql,output\ReadmissionRateDWH.sql,Dynamic
+62,Test ReadmissionRateCohort2,Test,output\ReadmissionRateCohortMDX.sql,output\ReadmissionRateCohortDWH.sql,Dynamic
+63,Test ReadmissionRateOrg2,Test,output\ReadmissionRateOrgMDX.sql,output\ReadmissionRateOrgDWH.sql,Dynamic
+64,Test Persist_Imaging2,Test,output\Img_Out_Persist_check.sql,Static_ImgOutputPersistStep2.txt,Static
+65,Test LOS_OUT_Rate results2,Test,output\LOS_OUT_MDX.sql,output\LOS_OUT_DWH.sql,Dynamic
+66,Test reRate_Out results2,Test,output\reRate_Out_MDX.sql,output\reRate_Out_DWH.sql,Dynamic
+67,Test FUV_Out_Rate results2,Test,output\FUV_Out_MDX.sql,output\FUV_Out_DWH.sql,Dynamic
+68,Test admited_rate_out2,Test,output\admited_rate_out_MDX.sql,output\admited_patient_rate_out_DWH.sql,Dynamic
+69,Test DWH_Procedure2,Test,output\Procedures_DWH.sql,Static_Procedures_DWH_Result_phase2.txt,Static
+70,Test Fact Conditions phase2,Test,output\Conditions_Actual.sql,output\Conditions2_Expected.sql,Dynamic
+71,Test Fact Labs Order phase2,Test,output\LabsOrder2_Actual.sql,output\LabsRequest2_Expected.sql,Dynamic
+72,Test Fact Labs Result Phase2,Test,output\LabsResult2_Actual.sql,output\LabsResult2_Expected.sql,Dynamic
+73,Test Generic Inpatient,Test,output\executive Check_SQL_In.sql,output\executive Check_MDX_Inpatient.sql,Dynamic
+74,Test Generic SQL OUT,Test,output\executive Check_SQL_Out.sql,output\executive Check_MDX_Outpatient.sql,Dynamic
+75,Test Prev Scores,Test,output\PervScoreDWH.sql,output\PrevScoreMDX.sql,Dynamic
+76,Test CPM Code Changes,Test,,,
+77,Load data to CAG3,Setup,input\INSERT_PopsAndMetrics.sql,,
+78,Run sync job phase3,Setup,LoadJob.sql,,
+79,Test Diff_CPMKPICalcs,Test,output\KPIScoreMDX.sql,output\KPIScoreDWH.sql,Dynamic
+80,Test Diff_MeasuresMembersMonthly_BMI,Test,output\MeasuresBMI_Actual.sql,Static_MeasuresBMI.txt,Static
+81,Test Diff_PopulationMembersMonthly_BMI,Test,output\PopulationBMI_Actual.sql,Static_PopulationBMI.txt,Static
+82,Test Diff_no_m2m,Test,output\no_m2m_check_MDX.sql,output\no_m2m_check_SQL.sql,Dynamic
+83,Test Diff_MeasuresMembersMonthly_HTNPharmacotherapy,Test,output\MeasuresHTNPharmacotherapy_Actual.sql,Static_MeasuresHTNPharmacotherapy_Actual.txt,Static
+84,Test Diff_PopulationMembersMonthly_HTNPharmacotherapy,Test,output\PopulationHTNPharmacotherapy_Actual.sql,Static_PopulationHTNPharmacotherapy_Actual.txt,Static
+85,Test Diff_MeasuresMembersMonthly_BP,Test,output\MeasuresMembersMonthly_ActualBP.sql,Static_MeasuresBP.csv,Static
+86,Test Diff_PopulationMembersMonthly_BP,Test,output\PopulationMembersMonthly_ActualBP.sql,Static_PopulationBP.csv,Static
+87,Test Diff_Measures_BPandHTNPharama,Test,output\Measures_ActualBPandHTNPharma.sql,Static_MeasuresBPandHTNPharma.csv,Static
+88,Test Diff_Population_BPandHTNPharma,Test,output\Population_ActualBPandHTNPharma.sql,Static_PopulationBPandHTNPharma.csv,Static
+89,Test Diff_CombinedScore,Test,output\COMBINED_SCORES_MDX.sql,output\COMBINED_SCORES_SQL.sql,Dynamic
+90,Test Population Age,Test,output\PopSum_Age.sql,output\PopCalc_Age.sql,Dynamic
+91,Test Population Org,Test,output\PopSum_Org.sql,output\PopCalc_Org.sql,Dynamic
+92,Test Population Provider,Test,output\PopSum_Provider.sql,output\PopCalc_Provider.sql,Dynamic
+93,Test Measure Age,Test,output\MeasureSum_Age.sql,output\MeasureCalc_Age.sql,Dynamic
+94,Test Measure Org,Test,output\MeasureSum_Org.sql,output\MeasureCalc_Org.sql,Dynamic
+95,Test Measure Provider,Test,output\MeasureSum_Provider.sql,output\MeasureCalc_Provider.sql,Dynamic
+96,Test Population Dates,Test,output\PopSum_Date.sql,output\PopCalc_Date.sql,Dynamic
+97,Test Measure Dates,Test,output\MeasureSum_Date.sql,output\MeasureCalc_Date.sql,Dynamic
+98,Test Community,Test,output\Community_MDX.sql,output\Community_SQL.sql,Dynamic
+99,Test Pop Distinct Pateints,Test,output\PopDistinctPatients_MDX.sql,output\PopDistinctPatients_SQL.sql,Dynamic
+100,Test Disease Provider,Test,output\DiseaseProviderMDX.sql,output\Disease_ProviderDWH.sql,Dynamic
+101,Test KPI Provider,Test,output\KPI_ProviderMDX.sql,output\KPI_ProviderDWH.sql,Dynamic
+102,Test Code Links,Test,output\CodeLinks.sql,Static_CodeLinks_Expected_Phase1.CSV,Static
+103,Test Code Links - Phase 2,Test,output\CodeLinks.sql,Static_CodeLinks_Expected_Phase2.CSV,Static
+104,Test Measurement,Test,output\Measurment_Actual.sql,output\Measurement_Expected.sql,Dynamic
+105,Test Measurement2,Test,output\Measurment2_Actual.sql,output\Measurement2_Expected.sql,Dynamic
+106,Test ValueSet,Test,output\ValueSet..sql,Static_ValueSetPhase1.csv,Static
+107,Test ValueSet phase2 ,Test,output\ValueSet..sql,Static_ValueSetPhase2.csv,Static
+108,testMoshe,Test,output\AG_ALL_SQL.sql,,Static
+109,Test ActiveIndicator,Test,output\ActiveIndicator.sql,Static_ActiveIndicator_Expected.CSV,Static
+110,Test ActiveIndicator_ExistingPOP,Test,output\ActiveIndicator_ExistingPOP.sql,Static_ActiveIndicator_ExistingPOP_Expected.CSV,Static
+111,Test ActiveIndicator2_ExistingPOP,Test,output\ActiveIndicator2_ExistingPOP.sql,Static_ActiveIndicator2_ExistingPOP.CSV,Static
+112,Test Test ActiveIndicator2,Test,output\ActiveIndicator2.sql,Static_ActiveIndicator2_Expected.CSV,Static
+113,Setup Cag ,Setup,input\setupCagPhase2.sql,,
+114,Test ActiveIndicatorComplex,Test,output\ActiveIndicatorComplex.sql,Static_ActiveIndicatorComplex_Expected.CSV,Static
+115,Test MCC Severity score,Test,output\MCCSeverityScore.sql,Static_MCC_Indicators_Expected.CSV,Static
+116,"Test Patient List Severity ,Rank",Test,output\PatientSeverityRankMDX.sql,output\PatientSeverityRankDWH.sql,Dynamic
+117,Test Provider Severity Score,Test,output\ProviderSeverityMDX.sql,output\ProviderSeverityDWH.sql,Dynamic
+118,readmission LACE In,Test,output\Readmission_LACE_MDX_Inpatient.sql,output\Readmission_LACE_In.sql,Dynamic
+119,readmission LACE Out,Test,output\Readmission_LACE_MDX_Outpatient.sql,output\Readmission_LACE_Out.sql,Dynamic
+120,Test LACE active indicators,Test,output\ActiveIndicatorForLACE.sql,Static_ActiveIndicaotrForLACE.CSV,Static
+121,Test LACE Severity score,Test,output\LACE_SeverityScore.sql,Static_LACESeverityScore.csv,Static
+122,Test LACE active indicator 2,Test,output\ActiveIndicatorForLACE.sql,Static_ActiveIndicaotrForLACE_2.CSV,Static
+123,Test LACE severity score 2,Test,output\LACE_SeverityScore.sql,Static_LACESeverityScore_2.CSV,Static
+124,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+125,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+126,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+127,Run PHA to CAG job,Setup,LoadJob_PHAtoCAG.sql,,
+128,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+129,Run PHA to CAG job,Setup,LoadJob_PHAtoCAG.sql,,
+130,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+131,Run PHA to CAG job,Setup,LoadJob_PHAtoCAG.sql,,
+132,PHA to CAG for MCC score,Test,output\PHAtoCAGforMCC_Actual.sql,output\PHAtoCAGforMCC_Expected.sql,Dynamic
+133,Insert Patients,Setup,input\Patients.sql,,
+134,Insert Patients Relations,Setup,input\Factless PPO.sql,,
+135,Insert Dim Comb Disease,Setup,input\Comb_Disease.sql,,
+136,Insert Fact Admissions,Setup,input\Admissions.sql,,
+137,Insert Fact ED Visits,Setup,input\EDvisits.sql,,
+138,Insert Fact Ambulatory Visits,Setup,input\AmbVisits.sql,,
+139,Insert Fact Readmissions,Setup,input\ReAdm.sql,,
+140,Insert Summary Population,Setup,input\Population.sql,,
+143,Test Calc Per 1000,Test,output\Util_Calc_Per1000_Actual.sql,output\Util_Calc_Per1000_Expected.sql,Dynamic
+144,Test Admissions vs Ages,Test,output\Util_Adm_AgeGroups_Actual.sql,output\Util_Adm_AgeGroups_Expected.sql,Dynamic
+141,Run Analytics job,Setup,LoadJob.sql,,Static
+148,Test Ambulatory vs Ages,Test,output\Util_Amb_AgeGroups_Actual.sql,output\Util_Amb_AgeGroups_Expected.sql,Dynamic
+149,Test ED vs Ages,Test,output\Util_ED_AgeGroups_Actual.sql,output\Util_ED_AgeGroups_Expected.sql,Dynamic
+149,Test Readmissions vs Ages,Test,output\Util_ReAdm_AgeGroups_Actual.sql,output\Util_ReAdm_AgeGroups_Expected.sql,Dynamic
+145,Test Admissions vs Diseases,Test,output\Util_Adm_Disease_Actual.sql,output\Util_Adm_Disease_Expected.sql,Dynamic
+146,Test Admissions vs MCC score,Test,output\Util_Adm_MCC_Actual.sql,output\Util_Adm_MCC_Expected.sql,Dynamic
+149,Test Admissions vs MCC score,Test,,,Dynamic
+147,Test Admissions vs 17 Active conditions,Test,output\Util_Adm_17_Actual.sql,output\Util_Adm_17_Expected.sql,Dynamic
+149,Test ED vs MCC score,Test,output\Util_ED_MCC_Actual.sql,output\Util_ED_MCC_Expected.sql,Dynamic
+142,Test Distinct Patients vs Ages,Test,output\Util_DistinctPat_AgeGroups_Actual.sql,output\Util_DistinctPat_AgeGroups_Expected.sql,Dynamic
+150,Test ED vs Ages,Test,output\Util_ED_AgeGroups_Actual.sql,output\Util_ED_AgeGroups_Expected.sql,Dynamic
+151,Test Readmissions vs Ages,Test,output\Util_ReAdm_AgeGroups_Actual.sql,output\Util_ReAdm_AgeGroups_Expected.sql,Dynamic
+155,Test ED vs MCC score,Test,output\Util_ED_MCC_Actual.sql,output\Util_ED_MCC_Expected.sql,Dynamic
+156,Test Fact Immunizations,Test,output\Immunizations_actual.sql,output\Immunizations_expected.sql,Dynamic
+157,Test Fact Medications,Test,output\MedicationActual.sql,output\Medicationexpected.sql,Dynamic
+158,Test Medications,Test,output\MedicationActual.sql,output\Medicationexpected.sql,Dynamic
+159,Test Immunizations,Test,output\Immunizations_actual.sql,output\Immunizations2_expected.sql,Dynamic

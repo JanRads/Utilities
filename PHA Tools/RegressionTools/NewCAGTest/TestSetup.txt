@@ -1,0 +1,41 @@
+*** Documentation ***
+Usage
+   ipybot --variable CAG_SRV:dbm8-data111\inst01 --variable DW_SRV:dbm8-data111\inst01 PHARegTest.txt
+
+*** Settings ***
+Library		OperatingSystem
+Library		DiffLibrary
+Library		String
+Resource	SQLCMD.txt	
+Variables	ConnectionString.py
+
+*** Test Cases ***
+Clear Prev
+	[Tags]  Cleanup
+	${rc} =   Run Keyword If	${Auto} == 0  Run	Del Phase1.csv
+	${rc} =   Run Keyword If	${Auto} == 0  Run	Del Phase2.csv
+	${rc} =   Run Keyword If	${Auto} == 0  Run	Del Phase3.csv
+##	Run Keyword If	${Auto} == 0	Log	${Auto}
+
+Copy XL to CSV
+    [Tags]    Load Data
+	Create CSV	Phase1
+	Create CSV	Phase2
+	Create CSV	Phase3
+
+Excel sheet
+	${files} = 	List Directory	${CURDIR}\\TestFiles	*.csv
+	@{fileNames} =	Clean String	${files}
+##	Log	@{fileNames}[2]
+	:FOR	${file}	IN	@{fileNames}
+	\	${file} =	Catenate	SEPARATOR=\\	TestFiles	${file}
+##	\	${data} =  read_csv_file	${file.strip()}
+	\	${data} =	Get File	${file.strip()}
+	\	@{tt} =	Split To Lines	${data}
+	\	Log	@{tt}[0]
+	\	Log		${data}	
+	\	@{Val} =	Clean String	${data}
+	\	Log	@{Val}[0]
+	\	Test Loop	${file}	@{tt}	
+
+

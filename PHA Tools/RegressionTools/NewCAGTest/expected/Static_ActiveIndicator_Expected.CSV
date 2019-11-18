@@ -1,0 +1,10 @@
+LastName,IndicatorId,FromDate,To_Date,measure_IndicatorInd,FlagNew
+secondnamePHA2.5_Alz_DX1,1,20141101,20171101,1,1
+secondnamePHA2.5_Alz_DX6,1,20141101,20171101,1,1
+secondnamePHA2.5_Alz_Pr1,1,20141201,20171201,1,1
+secondnamePHA2.5_Alz_Pr4,1,20141201,20171201,1,1
+secondnamePHA2.5_Alz_Pr5,1,20141201,20171201,1,1
+secondnamePHA25_CKD_2,7,20141101,20161101,1,1
+secondnamePHA25_Depr_Pr2,9,20160101,20170101,1,1
+secondnamePHA25_Ost_PD_Aut_Pr1,5,20141201,20161201,1,1
+secondnamePHA25_Ost_PD_Aut_Pr1,16,20141201,20161201,1,1

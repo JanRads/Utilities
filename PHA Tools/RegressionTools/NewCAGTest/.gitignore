@@ -1,0 +1,12 @@
+# Ignore all of these:
+*.html
+*.xml
+ConnectionString.py
+*.bat
+*.xlsx
+DataLoadingPhase*.SQL
+
+# But not these
+!Run.bat
+!PHARegTest.xlsx
+!/ResetDB/*.bat

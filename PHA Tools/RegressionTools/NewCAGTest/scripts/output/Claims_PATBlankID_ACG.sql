@@ -1,0 +1,1 @@
+SELECT COUNT(*) as Patient_ID FROM [dbmSemanticAnalyticsSTG].[ACG].[ReferencePatient]  WHERE patient_id IS NULL OR patient_id = ''

@@ -1,0 +1,8 @@
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\DALL\bin\Debug\DALL.dll
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\DALL\bin\Debug\DALL.pdb
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\DALL\obj\Debug\DALL.dll
+C:\PHA\dbm_Testing\suites\NewCAGTest\ManageTestsReg\DALL\obj\Debug\DALL.pdb
+C:\Users\mbila\Desktop\ManageTestsReg\DALL\bin\Debug\DALL.dll
+C:\Users\mbila\Desktop\ManageTestsReg\DALL\bin\Debug\DALL.pdb
+C:\Users\mbila\Desktop\ManageTestsReg\DALL\obj\Debug\DALL.dll
+C:\Users\mbila\Desktop\ManageTestsReg\DALL\obj\Debug\DALL.pdb

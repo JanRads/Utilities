@@ -1,0 +1,1 @@
+exec xp_cmdshell 'sqlcmd -S dbm8-data112\inst03 -i "C:\Program Files\Common Files\Regression\Input\CAG_DataLoadingSite2.sql" -o "C:\Program Files\Common Files\Regression\Output\CAG_DataLoadingSite2Out.sql"'
